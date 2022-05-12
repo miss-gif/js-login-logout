@@ -39,22 +39,11 @@ const idDelete = document.querySelector("#idDelete"); // 모든 ID 삭제 버튼
 
 // 모든 ID 조회
 idCheck.addEventListener("click", function () {
-  var txt = "";
-  var ans = "";
-  if (document.cookie != "") {
-    txt = document.cookie.split(";"); // ';'를 기준으로 split
-    for (i in txt) {
-      // txt에 있는 쿠키들을 조사
-      // name과 value 모두 있는 쿠키만 ans에 넣어준다.
-      if (txt[i][txt[i].length - 1] != "=") {
-        ans += txt[i];
-      }
-    }
+  if (!document.cookie) {
+    alert("생성된 아이디가 없습니다");
+  } else {
+    alert(document.cookie.split(";"));
   }
-  // 쿠키가 존재하지 않았을 경우
-  if (ans == "") alert("생성된 아이디가 없습니다.");
-  // 쿠키가 존재할 경우 alert(ans);
-  else alert(ans);
 });
 
 // 모든 ID 삭제
