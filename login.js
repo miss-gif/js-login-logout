@@ -48,9 +48,7 @@ idCheck.addEventListener("click", function () {
 
 // 모든 ID 삭제
 idDelete.addEventListener("click", 삭제);
-function 삭제() {
-  document.cookie = "ID = ; expires = Wed; 01 Jan 1970";
-}
+function 삭제() {}
 
 // 회원가입
 const idComplete = document.querySelector("#idComplete"); // 회원가입 버튼
@@ -84,6 +82,14 @@ function 생성() {
     passwordInputCreate2.style.border = "2px solid #ff0000";
   } else {
     passwordInputCreate2.style.border = "2px solid #00D000";
+    // 쿠키 생성
+    function setCookie(cname, cvalue, exdays) {
+      let d = new Date();
+      d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+      let expires = "expires=" + d.toUTCString();
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+    setCookie(idInputCreate.value, passwordInputCreate2.value, "3");
   }
 }
 
@@ -92,4 +98,11 @@ const loginBtn = document.querySelector("#loginBtn");
 loginBtn.addEventListener("click", function () {
   const loginId = document.querySelector("#loginId");
   const loginPw = document.querySelector("#loginPw");
+  // 쿠키 확인
+  let username = getCookie(cname);
+  if (username == loginId.value) {
+    alert("일치");
+  } else {
+    alert("불일치");
+  }
 });
