@@ -46,9 +46,12 @@ idCheck.addEventListener("click", function () {
   }
 });
 
-// 모든 ID 삭제
-idDelete.addEventListener("click", 삭제);
-function 삭제() {}
+// 입력한 ID 삭제
+idDelete.addEventListener("click", function () {
+  const idDel = document.querySelector("#idDel");
+  let delName = idDel.value;
+  document.cookie = delName + "=; max-age=0";
+});
 
 // 회원가입
 const idComplete = document.querySelector("#idComplete"); // 회원가입 버튼
@@ -94,15 +97,28 @@ function 생성() {
 }
 
 // 로그인
-const loginBtn = document.querySelector("#loginBtn");
+const loginBtn = document.querySelector("#loginBtn"); // 로그인 버튼
 loginBtn.addEventListener("click", function () {
-  const loginId = document.querySelector("#loginId");
-  const loginPw = document.querySelector("#loginPw");
-  // 쿠키 확인
-  let username = getCookie(cname);
-  if (username == loginId.value) {
-    alert("일치");
-  } else {
-    alert("불일치");
-  }
+  const loginId = document.querySelector("#loginId"); // 아이디 input
+  const loginPw = document.querySelector("#loginPw"); // 비밀번호 input
 });
+
+// ------------------------------------------
+
+const setCookie = function (name, value, expiredDay) {
+  const expired = new Date();
+  expired.setTime(expired.getTime() + expiredDay * 24 * 60 * 60 * 1000);
+  document.cookie = name + "=" + encodeURIComponent(value) + ";expires=" + expired.toUTCString() + ";path=/";
+};
+setCookie("usePopup", "true", 1);
+
+const getCookie = function (name) {
+  var value = document.cookie.match("(^|;) ?" + name + "=([^;]*)(;|$)");
+  return value ? decodeURIComponent(value[2]) : null;
+};
+getCookie("usePopup");
+
+const deleteCookie = function (name) {
+  document.cookie = name + "=; expires=Thu, 01 Jan 1999 00:00:10 GMT;";
+};
+deleteCookie("usePopup");

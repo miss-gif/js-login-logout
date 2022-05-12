@@ -56,3 +56,10 @@ input {
   border-radius: 5px;
   box-sizing: border-box;
 }
+
+#idCheck,
+#idDel,
+#idDelete {
+  width: 80%;
+  margin: 5px;
+}
