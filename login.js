@@ -42,7 +42,8 @@ idCheck.addEventListener("click", function () {
   if (!document.cookie) {
     alert("생성된 아이디가 없습니다");
   } else {
-    alert(document.cookie.split(";"));
+    // alert(document.cookie.split(";"));
+    console.log(document.cookie.split(";"));
   }
 });
 
@@ -101,24 +102,14 @@ const loginBtn = document.querySelector("#loginBtn"); // 로그인 버튼
 loginBtn.addEventListener("click", function () {
   const loginId = document.querySelector("#loginId"); // 아이디 input
   const loginPw = document.querySelector("#loginPw"); // 비밀번호 input
+
+  let cookieText = document.cookie.split(";");
+  let inputText = loginId.value + "=" + loginPw.value;
+  console.log(cookieText[0]);
+  console.log(inputText);
+  if (cookieText[0] == inputText) {
+    alert("로그인 성공");
+  } else {
+    alert("로그인 실패");
+  }
 });
-
-// ------------------------------------------
-
-const setCookie = function (name, value, expiredDay) {
-  const expired = new Date();
-  expired.setTime(expired.getTime() + expiredDay * 24 * 60 * 60 * 1000);
-  document.cookie = name + "=" + encodeURIComponent(value) + ";expires=" + expired.toUTCString() + ";path=/";
-};
-setCookie("usePopup", "true", 1);
-
-const getCookie = function (name) {
-  var value = document.cookie.match("(^|;) ?" + name + "=([^;]*)(;|$)");
-  return value ? decodeURIComponent(value[2]) : null;
-};
-getCookie("usePopup");
-
-const deleteCookie = function (name) {
-  document.cookie = name + "=; expires=Thu, 01 Jan 1999 00:00:10 GMT;";
-};
-deleteCookie("usePopup");
