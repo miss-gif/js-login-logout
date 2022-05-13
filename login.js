@@ -62,21 +62,23 @@ idDelete.addEventListener("click", function () {
 // 회원가입
 const idComplete = document.querySelector("#idComplete"); // 회원가입 버튼
 idComplete.addEventListener("click", 생성);
-function 생성() {
+function 생성(event) {
   const idInputCreate = document.querySelector("#idInputCreate");
   const passwordInputCreate = document.querySelector("#passwordInputCreate");
   const passwordInputCreate2 = document.querySelector("#passwordInputCreate2");
   // 아이디 입력값 제어
   if (idInputCreate.value == "") {
     idInputCreate.style.border = "2px solid #ff0000";
+    event.preventDefault();
     return false;
   }
   // 영문자+숫자 (8~20자리 입력) 정규식
   let idCheck = /^(?=.*[a-zA-Z])(?=.*[0-9]).{6,20}$/;
   if (!idCheck.test(idInputCreate.value)) {
-    alert("아이디는 영문자+숫자 조합으로 6~20자리 사용해야 합니다.");
+    alert("아이디는 6~20자, 영문과 숫자를 입력해 주세요.");
     idInputCreate.focus();
     idInputCreate.style.border = "2px solid #ff0000";
+    event.preventDefault();
     return false;
   } else {
     idInputCreate.style.border = "2px solid #00D000";
@@ -85,14 +87,16 @@ function 생성() {
   // 비밀번호 입력값 제어
   if (passwordInputCreate.value == "") {
     passwordInputCreate.style.border = "2px solid #ff0000";
+    event.preventDefault();
     return false;
   }
   // 영문자+숫자+특수조합 (8~20자리 입력) 정규식
   let pwCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/;
   if (!pwCheck.test(passwordInputCreate.value)) {
-    alert("비밀번호는 영문자+숫자+특수문자 조합으로 8~20자리 사용해야 합니다.");
+    alert("비밀번호는 8~20자, 영문과 숫자, 특수문자를 조합하여 입력해 주세요.");
     passwordInputCreate.focus();
     passwordInputCreate.style.border = "2px solid #ff0000";
+    event.preventDefault();
     return false;
   } else {
     passwordInputCreate.style.border = "2px solid #00D000";
@@ -101,10 +105,13 @@ function 생성() {
   // 비밀번호 재입력값 제어
   if (passwordInputCreate2.value == "") {
     passwordInputCreate2.style.border = "2px solid #ff0000";
+    event.preventDefault();
     return false;
   }
   if (passwordInputCreate.value !== passwordInputCreate2.value) {
     passwordInputCreate2.style.border = "2px solid #ff0000";
+    alert("비밀번호를 확인해 주세요.");
+    event.preventDefault();
     return false;
   } else {
     passwordInputCreate2.style.border = "2px solid #00D000";
@@ -121,19 +128,25 @@ function 생성() {
 
 // 로그인
 const loginBtn = document.querySelector("#loginBtn"); // 로그인 버튼
-loginBtn.addEventListener("click", function () {
+loginBtn.addEventListener("click", function (event) {
   const loginId = document.querySelector("#loginId"); // 아이디 input
   const loginPw = document.querySelector("#loginPw"); // 비밀번호 input
-
-  let cookieText = document.cookie.split(";");
+  let cookieText = document.cookie.split("; ");
   let inputText = loginId.value + "=" + loginPw.value;
-  console.log(cookieText[0]);
-  console.log(inputText);
+
+  // for (let i = 0; i < cookieText.length; i++) {
+  //   console.log(i);
+  // }
+
+  console.log("로그인 시도");
+
   if (cookieText[0] == inputText) {
     alert("로그인 성공");
   } else {
+    alert("로그인 실패");
     const loginErrorText = document.querySelector("#loginErrorText");
     loginErrorText.innerHTML = "아이디 혹은 비밀번호를 잘못 입력하셨습니다.";
+    event.preventDefault();
     return false;
   }
 });
