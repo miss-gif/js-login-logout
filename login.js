@@ -70,38 +70,40 @@ function 생성() {
   if (idInputCreate.value == "") {
     idInputCreate.style.border = "2px solid #ff0000";
     return false;
-  } else if (idInputCreate.value.length < 6) {
+  }
+  // 영문자+숫자 (8~20자리 입력) 정규식
+  let idCheck = /^(?=.*[a-zA-Z])(?=.*[0-9]).{6,20}$/;
+  if (!idCheck.test(idInputCreate.value)) {
+    alert("아이디는 영문자+숫자 조합으로 6~20자리 사용해야 합니다.");
+    idInputCreate.focus();
     idInputCreate.style.border = "2px solid #ff0000";
     return false;
   } else {
     idInputCreate.style.border = "2px solid #00D000";
   }
-  // 비밀번호 입력값 제어
-  // 비밀번호 영문자+숫자+특수조합(8~25자리 입력) 정규식
-  let pwCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
-  if (!pwCheck.test(passwordInputCreate.value)) {
-    alert("비밀번호는 영문자+숫자+특수문자 조합으로 8~25자리 사용해야 합니다.");
-    passwordInputCreate.focus();
-    return false;
-  }
 
+  // 비밀번호 입력값 제어
   if (passwordInputCreate.value == "") {
     passwordInputCreate.style.border = "2px solid #ff0000";
     return false;
-  } else if (passwordInputCreate.value.length < 8) {
+  }
+  // 영문자+숫자+특수조합 (8~20자리 입력) 정규식
+  let pwCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/;
+  if (!pwCheck.test(passwordInputCreate.value)) {
+    alert("비밀번호는 영문자+숫자+특수문자 조합으로 8~20자리 사용해야 합니다.");
+    passwordInputCreate.focus();
     passwordInputCreate.style.border = "2px solid #ff0000";
     return false;
   } else {
     passwordInputCreate.style.border = "2px solid #00D000";
   }
+
   // 비밀번호 재입력값 제어
   if (passwordInputCreate2.value == "") {
     passwordInputCreate2.style.border = "2px solid #ff0000";
     return false;
-  } else if (passwordInputCreate2.value.length < 8) {
-    passwordInputCreate2.style.border = "2px solid #ff0000";
-    return false;
-  } else if (passwordInputCreate.value !== passwordInputCreate2.value) {
+  }
+  if (passwordInputCreate.value !== passwordInputCreate2.value) {
     passwordInputCreate2.style.border = "2px solid #ff0000";
     return false;
   } else {
@@ -130,7 +132,8 @@ loginBtn.addEventListener("click", function () {
   if (cookieText[0] == inputText) {
     alert("로그인 성공");
   } else {
-    alert("로그인 실패");
+    const loginErrorText = document.querySelector("#loginErrorText");
+    loginErrorText.innerHTML = "아이디 혹은 비밀번호를 잘못 입력하셨습니다.";
     return false;
   }
 });

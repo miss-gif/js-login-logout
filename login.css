@@ -72,3 +72,7 @@ form p {
 label {
   font-weight: 600;
 }
+
+#loginErrorText {
+  color: red;
+}
