@@ -11,7 +11,6 @@ idCreateBtn.addEventListener("click", function () {
   } else {
     idCreateWindow.classList.add(hidden);
   }
-
   if (loginWindow.classList.contains(hidden)) {
     loginWindow.classList.remove(hidden);
   } else {
@@ -42,7 +41,7 @@ idCheck.addEventListener("click", function () {
   if (!document.cookie) {
     alert("생성된 아이디가 없습니다");
   } else {
-    // alert(document.cookie.split(";"));
+    alert(document.cookie.split(";"));
     console.log(document.cookie.split(";"));
   }
 });
@@ -54,6 +53,12 @@ idDelete.addEventListener("click", function () {
   document.cookie = delName + "=; max-age=0";
 });
 
+//--------------------------------------------------------------------------------------------------------------------------------------------//
+//--------------------------------------------------------------------------------------------------------------------------------------------//
+//--------------------------------------------------------------------------------------------------------------------------------------------//
+//--------------------------------------------------------------------------------------------------------------------------------------------//
+//--------------------------------------------------------------------------------------------------------------------------------------------//
+
 // 회원가입
 const idComplete = document.querySelector("#idComplete"); // 회원가입 버튼
 idComplete.addEventListener("click", 생성);
@@ -64,26 +69,41 @@ function 생성() {
   // 아이디 입력값 제어
   if (idInputCreate.value == "") {
     idInputCreate.style.border = "2px solid #ff0000";
+    return false;
   } else if (idInputCreate.value.length < 6) {
     idInputCreate.style.border = "2px solid #ff0000";
+    return false;
   } else {
     idInputCreate.style.border = "2px solid #00D000";
   }
   // 비밀번호 입력값 제어
+  // 비밀번호 영문자+숫자+특수조합(8~25자리 입력) 정규식
+  let pwCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
+  if (!pwCheck.test(passwordInputCreate.value)) {
+    alert("비밀번호는 영문자+숫자+특수문자 조합으로 8~25자리 사용해야 합니다.");
+    passwordInputCreate.focus();
+    return false;
+  }
+
   if (passwordInputCreate.value == "") {
     passwordInputCreate.style.border = "2px solid #ff0000";
+    return false;
   } else if (passwordInputCreate.value.length < 8) {
     passwordInputCreate.style.border = "2px solid #ff0000";
+    return false;
   } else {
     passwordInputCreate.style.border = "2px solid #00D000";
   }
   // 비밀번호 재입력값 제어
   if (passwordInputCreate2.value == "") {
     passwordInputCreate2.style.border = "2px solid #ff0000";
+    return false;
   } else if (passwordInputCreate2.value.length < 8) {
     passwordInputCreate2.style.border = "2px solid #ff0000";
+    return false;
   } else if (passwordInputCreate.value !== passwordInputCreate2.value) {
     passwordInputCreate2.style.border = "2px solid #ff0000";
+    return false;
   } else {
     passwordInputCreate2.style.border = "2px solid #00D000";
     // 쿠키 생성
@@ -111,5 +131,6 @@ loginBtn.addEventListener("click", function () {
     alert("로그인 성공");
   } else {
     alert("로그인 실패");
+    return false;
   }
 });

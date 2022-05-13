@@ -18,9 +18,12 @@
     <main>
       <div id="loginWindow" class="loginWindow">
         <h2>로그인</h2>
-        <form action="./index.html">
+        <form>
+          <label for="loginId">아이디</label>
           <input id="loginId" type="text" placeholder="아이디를 입력하세요" minlength="6" required />
+          <label for="loginPw">비밀번호</label>
           <input id="loginPw" type="password" placeholder="비밀번호를 입력하세요" minlength="8" required />
+          <p>아이디 혹은 비밀번호를 잘못 입력하셨습니다.</p>
           <input id="loginBtn" type="submit" />
         </form>
         <button id="idCreateBtn">회원가입</button>
@@ -29,9 +32,14 @@
       <div id="idCreateWindow" class="idCreateWindow hidden">
         <h2>회원가입</h2>
         <form>
+          <label for="idInputCreate">아이디</label>
           <input id="idInputCreate" type="text" placeholder="아이디를 입력하세요" minlength="6" required value="123456" />
+          <p>6~20자 영문, 숫자로 입력해 주세요.</p>
+          <label for="passwordInputCreate">비밀번호</label>
           <input id="passwordInputCreate" type="password" placeholder="비밀번호를 입력하세요" minlength="8" required value="12345678" />
+          <label for="passwordInputCreate2">비밀번호 재확인</label>
           <input id="passwordInputCreate2" type="password" placeholder="비밀번호를 재입력하세요" minlength="8" required value="12345678" />
+          <p>8~20자 영문, 숫자, 특수문자 조합으로 입력해 주세요.</p>
           <input id="idComplete" type="submit" />
         </form>
         <button id="returnBtn">취소하기</button>

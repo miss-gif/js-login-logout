@@ -63,3 +63,12 @@ input {
   width: 80%;
   margin: 5px;
 }
+
+form p {
+  font-size: 12px;
+  margin-top: 0;
+}
+
+label {
+  font-weight: 600;
+}
