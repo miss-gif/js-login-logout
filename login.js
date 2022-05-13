@@ -32,7 +32,7 @@ returnBtn.addEventListener("click", function () {
   }
 });
 
-// 관리자 모드
+// 관리자 기능
 const idCheck = document.querySelector("#idCheck"); // 모든 ID 조회 버튼
 const idDelete = document.querySelector("#idDelete"); // 모든 ID 삭제 버튼
 
@@ -41,8 +41,8 @@ idCheck.addEventListener("click", function () {
   if (!document.cookie) {
     alert("생성된 아이디가 없습니다");
   } else {
-    alert(document.cookie.split(";"));
-    console.log(document.cookie.split(";"));
+    alert(document.cookie.split("; "));
+    console.log(document.cookie.split("; "));
   }
 });
 
@@ -52,12 +52,6 @@ idDelete.addEventListener("click", function () {
   let delName = idDel.value;
   document.cookie = delName + "=; max-age=0";
 });
-
-//--------------------------------------------------------------------------------------------------------------------------------------------//
-//--------------------------------------------------------------------------------------------------------------------------------------------//
-//--------------------------------------------------------------------------------------------------------------------------------------------//
-//--------------------------------------------------------------------------------------------------------------------------------------------//
-//--------------------------------------------------------------------------------------------------------------------------------------------//
 
 // 회원가입
 const idComplete = document.querySelector("#idComplete"); // 회원가입 버튼
@@ -115,6 +109,7 @@ function 생성(event) {
     return false;
   } else {
     passwordInputCreate2.style.border = "2px solid #00D000";
+    alert("아이디가 생성되었습니다.");
     // 쿠키 생성
     function setCookie(cname, cvalue, exdays) {
       let d = new Date();
